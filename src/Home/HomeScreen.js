@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, PermissionsAndroid, Text, TouchableOpacity, View } from 'react-native';
+import analytics from '@react-native-firebase/analytics';
+import { firebaseLogEvent } from '../Utilities/FirebaseUtilites';
 
 function HomeScreen(props) {
     const leftValue = useState(new Animated.Value(0))[0];
@@ -64,6 +66,7 @@ function HomeScreen(props) {
     })
 
     useEffect(() => {
+        firebaseLogEvent("APP OPEN UP",{})
         const notificationsPermission = PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
         console.log("notificationsPermission",notificationsPermission)
     },[])
